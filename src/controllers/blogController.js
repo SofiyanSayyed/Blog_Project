@@ -7,9 +7,6 @@ let dateAndTime = moment().format('LLLL');
 const createBlog = async function(req, res) {
     try {
         let data = req.body
-        if (Object.keys(data).length == 0) {
-            return res.status(400).send({ status: false, message: "data is required" })
-        }
         if(data.isPublished== true){
             data.publishedAt = dateAndTime
         }
@@ -33,7 +30,7 @@ const getBlogs = async function(req, res) {
     try {
         let data = req.query;
         let { authorId, category, tags, subcategory } = data;
-        let blogs = await blogModel.find({ $and: [{ isPublished: true },{deletedAt:null}, { isDeleted: false }, data] })
+        let blogs = await blogModel.find({ $and: [{ isPublished: true }, { isDeleted: false }, data] })
         if (blogs.length < 1) {
             return res.status(404).send({ status: false, message: "No Blogs Found" })
         } else {
@@ -112,7 +109,7 @@ const deleteBlog = async function (req, res) {
             return res.status(404).send({ status: false, message: "blog not found" })
         }
         else {
-            return res.status(200).send({status:true,message:"deleted successfully"})
+            return res.status(200).send()
         }
 
     } catch (error) {
