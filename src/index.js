@@ -2,7 +2,7 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const mongoose = require("mongoose");
-const route = require("../routes/route");
+const route = require("./routes/route");
 
 const app = express(); // calling express
 
