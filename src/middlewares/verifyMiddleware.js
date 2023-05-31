@@ -1,5 +1,6 @@
 const authorModel = require("../models/authorModel")
 const mongoose = require("mongoose")
+const blogModel = require("../models/blogModel")
 const ObjectId = mongoose.Types.ObjectId
 
 // creating middleware for verifying ID form req.body
@@ -14,7 +15,7 @@ const authorChecker = async function (req, res, next) {
         }
         let author = await authorModel.findById(id)
         if (!author) {
-            return res.status(400).send({ status: false, message: "there is no author with this author id" })
+            return res.status(404).send({ status: false, message: "there is no author with this author id" })
         }
         next()
     } catch (error) {
@@ -26,10 +27,14 @@ const verifyId = async function (req, res, next) {
     try {
         let authorId = req.query.authorId
         let blogId = req.params.blogId
-        let id=blogId || authorId
+        let id=blogId 
+        id1=authorId
         
         if (id && !ObjectId.isValid(id)) {
-            return res.status(400).send({status:true,message:"Please enter a valid id"})
+            return res.status(400).send({status:false,message:"Please enter a valid id"})
+        }
+        if (id1 && !ObjectId.isValid(id1)) {
+            return res.status(404).send({status:false,message:"Please enter a valid id"})
         }
         next()
     } catch (error) {
