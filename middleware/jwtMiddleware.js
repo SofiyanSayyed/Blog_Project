@@ -1,5 +1,5 @@
-const authorModel = require("../models/authorModel")
-const blogModel = require("../models/blogModel")
+const authorModel = require("../model/authorModel")
+const blogModel = require("../model/blogModel")
 const jwt = require("jsonwebtoken")
 const validator = require("validator")
 
@@ -15,9 +15,12 @@ const verifyEmailPass = async function (req, res, next) {
             return res.status(400).send({ status: false, message: "email is invalid" })
         }
 
+
+
+
         let author = await authorModel.findOne({ email: email, password: password })
         if (!author) {
-            return res.status(401).send({ status: false, message: "email or password is incorrect" })
+            return res.status(400).send({ status: false, message: "email or password is incorrect" })
         }
         let authorId = author._id
         req.authorId = authorId
@@ -38,7 +41,7 @@ const verifytoken = async function (req, res, next) {
         }
         let decoded = jwt.verify(token, "Prahlad_Rohit_Sofiyan_Saurabh_Secret_Key")
         if (!decoded) {
-            return res.status(403).send({ status: false, message: "invalid token" })
+            return res.status(401).send({ status: false, message: "invalid token" })
         }
         req.authorId = decoded.authorId
         next()
@@ -47,7 +50,7 @@ const verifytoken = async function (req, res, next) {
         if (err.message.includes("signature") || err.message.includes("token") || err.message.includes("malformed")) {
 
             // console.log(err.message)
-            return res.status(403).send({ status: false, message: "You are not Authenticated" })
+            return res.status(401).send({ status: false, message: "You are not Authenticated" })
         }
         return res.status(500).send({ status: false, message: err.message })
     }

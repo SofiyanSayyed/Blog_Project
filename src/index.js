@@ -2,8 +2,7 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const mongoose = require("mongoose");
-const route = require("./routes/route");
-
+const route = require("../routes/route");
 const app = express(); // calling express
 
 //-------------------------using body-Parser middleware--------------------------------//
@@ -15,7 +14,7 @@ const PORT = 4000;
 //---------------------------connecting to mongoDB--------------------------------//
 mongoose
     .connect(
-        "mongodb+srv://SofiyanSayyed:hsxRh6DS5ZlfI1Kj@cluster0.lnyemj3.mongodb.net/Author_Blog_Project",
+        "mongodb+srv://jhaprahlad:mEG8wRQKwJidfdq2@cluster0.qqlks75.mongodb.net/group4Database?retryWrites=true&w=majority",
         {
             useNewUrlParser: true,
         }

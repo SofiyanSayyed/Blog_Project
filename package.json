@@ -5,12 +5,11 @@
   "description": "In this project we are going to create a mini bloggin site.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SofiyanSayyed/Blog_Project.git"
+  "repository":{
+    "type":"git",
+    "url":"git+https://github.com/jhaprahlad/author_blog_project.git"
   },
   "engines":{
     "npm" :">=8.0.0 <10.0.0",
